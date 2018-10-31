@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const _ = require('underscore');
 const uniqueValidator = require('mongoose-unique-validator');
 
-// Valores del campo 'role' permitidos, con mensaje de error.
-let validRoles = {
-    values: ['ADMIN_ROLE', 'USER_ROLE'],
-    message: '{VALUE} no es un rol valido'
-};
 
 // Se define el esquema de usuario de la BD.
 let userSchema = new mongoose.Schema({
@@ -29,21 +24,17 @@ let userSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    role: {
+    city: {
         type: String,
-        default: 'USER_ROLE',
-        enum: validRoles
+        required: true
     },
-    friends: {
-        type: [mongoose.Schema.Types.ObjectId]
+    position: {
+        type: String,
+        required: true
     },
-    state: {
-        type: Boolean,
-        default: true
-    },
-    google: {
-        type: Boolean,
-        default: false
+    playedGames: {
+        type: Number,
+        required: false,
     }
 });
 
@@ -54,7 +45,7 @@ let userSchema = new mongoose.Schema({
  */
 userSchema.methods.toJSON = function() {
     let user = this.toObject();
-    user = _.pick(user, ['_id', 'name', 'email', 'img', 'friends', 'role', 'state', 'google']);
+    user = _.pick(user, ['_id', 'name', 'email', 'img', 'city', 'position']);
     return user;
 };
 
