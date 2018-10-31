@@ -34,6 +34,9 @@ let userSchema = new mongoose.Schema({
         default: 'USER_ROLE',
         enum: validRoles
     },
+    friends: {
+        type: [mongoose.Schema.Types.ObjectId]
+    },
     state: {
         type: Boolean,
         default: true
@@ -51,7 +54,7 @@ let userSchema = new mongoose.Schema({
  */
 userSchema.methods.toJSON = function() {
     let user = this.toObject();
-    user = _.pick(user, ['_id', 'name', 'email', 'img', 'role', 'state', 'google']);
+    user = _.pick(user, ['_id', 'name', 'email', 'img', 'friends', 'role', 'state', 'google']);
     return user;
 };
 
