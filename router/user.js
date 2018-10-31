@@ -2,6 +2,8 @@
  * Archivo con las respuestas en la ruta localhost:8080/usuario
  */
 const express = require('express');
+const User = require('../models/user');
+const bcrypt = require('bcrypt');
 
 const app = express();
 
@@ -18,7 +20,8 @@ app.post('/usuario', (req, res) => {
         name: body.name,
         email: body.email,
         password: body.password ? bcrypt.hashSync(body.password, 10) : body.password,
-        city: body.city
+        city: body.city,
+        position: body.position
     });
 
     // Guarda el usuario en la base de datos.
@@ -37,3 +40,5 @@ app.post('/usuario', (req, res) => {
         });
     });
 });
+
+module.exports = app;
