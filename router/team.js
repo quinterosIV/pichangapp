@@ -5,17 +5,17 @@ const _ = require('underscore');
 
 const app = express();
 
-app.post('/equipo',req,res) => {
-  let body= red.body;
+app.post('/equipo', (req,res) => {
+  let body= req.body;
   let newTeam= new Team({
-    name: body.name.
+    name: body.name,
     shield: body.shield,
     calification: body.calification,
     pos: body.pos,
     players: body.players
   });
 
-  newTeam.save((err,teamDB)) =>{
+  newTeam.save((err,teamDB) => {
     // En caso de no crearlo, retorna el error.
    if(err)
        return res.status(400).json({
@@ -27,11 +27,9 @@ app.post('/equipo',req,res) => {
         ok: true,
         user: teamDB,
         msg: 'Equipo creado con exito.'
-  }
-
-
-}
-
+    })
+  })
+})
 
 
 

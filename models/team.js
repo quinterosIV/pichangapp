@@ -4,7 +4,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 let teamSchema = new mongoose.Schema({
   name: {
-    type String,
+    type: String,
     unique: true,
     required: [true,'El nombre es obligatorio']
   },
@@ -19,7 +19,7 @@ let teamSchema = new mongoose.Schema({
   },
   pos: {
     type: String,
-  }
+  },
   players:{
     type: Array,
     required: false
