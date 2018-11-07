@@ -8,22 +8,31 @@ let teamSchema = new mongoose.Schema({
     unique: true,
     required: [true,'El nombre es obligatorio']
   },
-
+  cap : {
+    type: String,
+    required: true
+  },
   shield: {
     type: String,
-    required: [true,'Es necesario ingresar un escudo al equipo']
-  },
-
-  calification:{
-    type: String,
-  },
-  pos: {
-    type: String,
+    required: false
   },
   players:{
     type: Array,
     required: false
+  },
+  matches: {
+    type: Array,
+    required: false
+  },
+  nvotes: {
+    type: Number,
+    required: false,
+  },
+  votes: {
+    type: Number,
+    required: false
   }
+  
 });
 
 teamSchema.methods.toJSON = function() {
