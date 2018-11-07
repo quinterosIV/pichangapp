@@ -9,6 +9,7 @@ exports.createUser = (req, res) => {
     let newUser = new User({
         name: body.name,
         email: body.email,
+        username: body.username,
         password: body.password ? bcrypt.hashSync(body.password, 10) : body.password,
         city: body.city,
         position: body.position
@@ -29,4 +30,45 @@ exports.createUser = (req, res) => {
             msg: 'Usuario creado con exito.'
         });
     });
+}
+
+exports.getUsers = (req,res) => {
+    User.find
+}
+
+exports.addFriend = (req, res) => {
+    User.findOneAndUpdate({username : req.body.user_1},{ $push : {friends : req.body.user_2} }, {new : true},(err,doc)=>{
+        if (err)            
+            return res.status(400).json({
+                ok: false,
+                err: err,
+        });
+    });
+    User.findOneAndUpdate({username : req.body.user_2},{ $push : {friends : req.body.user_1} }, {new : true},(err,doc)=>{
+        if (err)            
+            return res.status(400).json({
+                ok: false,
+                err: err,
+        });
+        res.json({
+            ok: true,
+            msg: 'Amigo agregado.'
+        });
+    });
+
+}
+
+exports.listFriends = (req, res) =>{
+    User.findOne({username : req.query.username}, function(err,user){
+        if (err)            
+            return res.status(400).json({
+                ok: false,
+                err: err,
+        });
+        res.json({
+            ok: true,
+            msg: user.friends
+        });
+    });
+
 }
