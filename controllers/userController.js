@@ -1,19 +1,9 @@
-/*
- * Archivo con las respuestas en la ruta localhost:8080/usuario
- */
-const express = require('express');
+const mongoose = require('mongoose');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
-const app = express();
-
-// Responde peticiones GET en el directorio "localhost:8080".
-app.get('/', (req, res) => {
-    res.json('Pagina de inicio');
-});
-
 // Creacion de usuarios con solicitudes POST en "localhost:8080/usuario".
-app.post('/usuario', (req, res) => {
+exports.createUser = (req, res) => {
     let body = req.body;
     // Crea un nuevo usuario con el esquema importado.
     let newUser = new User({
@@ -39,6 +29,4 @@ app.post('/usuario', (req, res) => {
             msg: 'Usuario creado con exito.'
         });
     });
-});
-
-module.exports = app;
+}
