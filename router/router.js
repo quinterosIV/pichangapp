@@ -6,6 +6,7 @@ const teamController = require('../controllers/teamController');
 
 router.route('/usuario').post(userController.createUser);
 router.route('/login').post(loginController.login);
-router.route('/equipo').post(teamController.createTeam).put(teamController.calificar)
+router.route('/equipo').post(teamController.createTeam);
+router.route('/calificar').put(teamController.calificar);
 
 module.exports = router;
