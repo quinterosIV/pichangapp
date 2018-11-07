@@ -32,9 +32,6 @@ exports.createUser = (req, res) => {
     });
 }
 
-exports.getUsers = (req,res) => {
-    User.find
-}
 
 exports.addFriend = (req, res) => {
     User.findOneAndUpdate({username : req.body.user_1},{ $push : {friends : req.body.user_2} }, {new : true},(err,doc)=>{

@@ -37,7 +37,7 @@ let teamSchema = new mongoose.Schema({
 
 teamSchema.methods.toJSON = function() {
     let team = this.toObject();
-    team = _.pick(team, ['_id', 'name', 'shield', 'calification', 'pos']);
+    team = _.pick(team, ['_id', 'name', 'shield', 'nvotes', 'votes', 'calification', 'pos']);
     return team;
 };
 

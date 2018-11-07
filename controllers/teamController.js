@@ -25,6 +25,23 @@ exports.createTeam = (req, res) => {
         });
     });
 }
+exports.getRanking = (req,res) => {
+    Team.find({}, function(err, teams) {
+        var RankList = [];
+    
+        teams.forEach(function(team) {
+            var valor=team.votes/team.nvotes;
+            team["calification"]=valor;
+            RankList.push(team);
+        });
+    
+        res.send(RankList);  
+    });
+}
+    
+/**homes.sort(function(a, b) {
+    return parseFloat(a.price) - parseFloat(b.price);
+}); */
 
 exports.calificar = (req,res) => {
 
