@@ -28,5 +28,5 @@ exports.createTeam = (req, res) => {
 
 exports.calificar = (req,res) => {
   let body= req.body
-  Team.findOneAndUpdate({name:body.name},$sum:{ nvotes: +1, votes: + body.votes})
+  Team.findOneAndUpdate({name:body.name},{$sum:{ nvotes: +1, votes: + body.votes}})
 }
