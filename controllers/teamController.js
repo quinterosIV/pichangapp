@@ -25,3 +25,18 @@ exports.createTeam = (req, res) => {
         });
     });
 }
+
+exports.calificar = (req,res) => {
+
+  Team.findOneAndUpdate({name:body.name}, {$inc : { nvotes: 1, votes: body.votes}},{new: true},(err,doc) => {
+    if (err)            
+        return res.status(400).json({
+        ok: false,
+        err: err,
+    });
+    res.json({
+        ok: true,
+        msg: "la calificacion actual es: " + doc.votes/doc.nvotes
+    });
+  });
+}

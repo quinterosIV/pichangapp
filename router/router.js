@@ -11,6 +11,8 @@ router.route('/usuario/add').put(userController.addFriend);
 router.route('/listFriends').get(userController.listFriends);
 router.route('/login').post(loginController.login);
 router.route('/equipo').post(teamController.createTeam);
+router.route('/calificar').put(teamController.calificar);
 router.route('/:username/crearpartido').post(matchController.createMatch);
+
 
 module.exports = router;
