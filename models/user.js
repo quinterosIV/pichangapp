@@ -10,6 +10,11 @@ let userSchema = new mongoose.Schema({
         // Es necesario este campo para poder insertar en la BD.
         required: [true, 'El nombre es obligatorio']
     },
+    username: {
+        type: String,
+        index: {unique: true},
+        required: [true, 'El Nombre de usuario es obligatorio']
+    },
     email: {
         type: String,
         // No se admiten duplicados.
@@ -24,6 +29,10 @@ let userSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    friends:{
+        type: [String], //referencia a user.username
+        required: false
+    },
     city: {
         type: String,
         required: true
@@ -31,6 +40,10 @@ let userSchema = new mongoose.Schema({
     position: {
         type: String,
         required: true
+    },
+    teams: {
+        type: [String], //referencia a team.name
+        required: false
     },
     playedGames: {
         type: Number,
@@ -45,7 +58,7 @@ let userSchema = new mongoose.Schema({
  */
 userSchema.methods.toJSON = function() {
     let user = this.toObject();
-    user = _.pick(user, ['_id', 'name', 'email', 'img', 'city', 'position']);
+    user = _.pick(user, ['_id', 'name', 'email', 'img', 'friends', 'city', 'position']);
     return user;
 };
 
